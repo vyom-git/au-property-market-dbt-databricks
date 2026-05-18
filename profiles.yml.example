@@ -1,0 +1,11 @@
+au_property_market:
+  target: dev
+  outputs:
+    dev:
+      type: databricks
+      catalog: main
+      schema: property_analytics
+      host: YOUR_DATABRICKS_HOST
+      http_path: YOUR_SQL_WAREHOUSE_HTTP_PATH
+      token: YOUR_DATABRICKS_PERSONAL_ACCESS_TOKEN
+      threads: 4
