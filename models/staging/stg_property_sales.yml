@@ -1,0 +1,35 @@
+version: 2
+
+models:
+  - name: stg_property_sales
+    description: Cleaned staging model for NSW property sales data.
+
+    columns:
+      - name: property_id
+        description: Source property identifier.
+        tests:
+          - not_null
+
+      - name: sale_counter
+        description: Sale counter from the raw source file.
+        tests:
+          - not_null
+
+      - name: suburb
+        description: Standardised uppercase locality or suburb.
+        tests:
+          - not_null
+
+      - name: contract_date
+        description: Contract date converted from source format.
+
+      - name: settlement_date
+        description: Settlement date converted from source format.
+
+      - name: purchase_price
+        description: Property sale purchase price.
+        tests:
+          - not_null
+
+      - name: primary_purpose
+        description: Main purpose or use of the property.

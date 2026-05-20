@@ -1,0 +1,71 @@
+version: 2
+
+sources:
+  - name: bronze
+    description: Raw NSW property sales data loaded into the Databricks bronze layer.
+    schema: property_analytics_bronze
+
+    tables:
+      - name: raw_property_sales
+        description: Raw NSW property sales CSV loaded as a bronze Delta table.
+
+        columns:
+          - name: Property ID
+            description: Source property identifier from NSW property sales data.
+
+          - name: Sale counter
+            description: Counter identifying each sale record within the source file.
+
+          - name: Download date / time
+            description: Timestamp showing when the source data was downloaded or generated.
+
+          - name: Property name
+            description: Property name where available.
+
+          - name: Property unit number
+            description: Unit number where applicable.
+
+          - name: Property house number
+            description: House or street number.
+
+          - name: Property street name
+            description: Street name of the property.
+
+          - name: Property locality
+            description: Locality or suburb of the property.
+
+          - name: Property post code
+            description: Postcode of the property.
+
+          - name: Area
+            description: Land or property area.
+
+          - name: Area type
+            description: Unit of measurement for the area field.
+
+          - name: Contract date
+            description: Date when the sale contract was signed.
+
+          - name: Settlement date
+            description: Date when the property sale settled.
+
+          - name: Purchase price
+            description: Sale price of the property.
+
+          - name: Zoning
+            description: Property zoning classification.
+
+          - name: Nature of property
+            description: Source classification for the property type.
+
+          - name: Primary purpose
+            description: Main use or purpose of the property.
+
+          - name: Strata lot number
+            description: Strata lot number where applicable.
+
+          - name: Dealing number
+            description: Legal dealing number for the property transaction.
+
+          - name: Property legal description
+            description: Legal description of the property.
