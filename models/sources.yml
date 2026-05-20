@@ -3,6 +3,7 @@ version: 2
 sources:
   - name: bronze
     description: Raw NSW property sales data loaded into the Databricks bronze layer.
+    database: workspace
     schema: property_analytics_bronze
 
     tables:
@@ -10,62 +11,65 @@ sources:
         description: Raw NSW property sales CSV loaded as a bronze Delta table.
 
         columns:
-          - name: Property ID
+          - name: property_id
             description: Source property identifier from NSW property sales data.
 
-          - name: Sale counter
+          - name: sale_counter
             description: Counter identifying each sale record within the source file.
 
-          - name: Download date / time
-            description: Timestamp showing when the source data was downloaded or generated.
+          - name: download_date_time
+            description: Timestamp string showing when the source data was downloaded or generated.
 
-          - name: Property name
+          - name: property_name
             description: Property name where available.
 
-          - name: Property unit number
+          - name: property_unit_number
             description: Unit number where applicable.
 
-          - name: Property house number
+          - name: property_house_number
             description: House or street number.
 
-          - name: Property street name
+          - name: property_street_name
             description: Street name of the property.
 
-          - name: Property locality
+          - name: property_locality
             description: Locality or suburb of the property.
 
-          - name: Property post code
+          - name: property_post_code
             description: Postcode of the property.
 
-          - name: Area
+          - name: area
             description: Land or property area.
 
-          - name: Area type
+          - name: area_type
             description: Unit of measurement for the area field.
 
-          - name: Contract date
-            description: Date when the sale contract was signed.
+          - name: contract_date
+            description: Date string when the sale contract was signed.
 
-          - name: Settlement date
-            description: Date when the property sale settled.
+          - name: settlement_date
+            description: Date string when the property sale settled.
 
-          - name: Purchase price
-            description: Sale price of the property.
+          - name: purchase_price
+            description: Sale price of the property as loaded from the bronze source.
 
-          - name: Zoning
+          - name: zoning
             description: Property zoning classification.
 
-          - name: Nature of property
+          - name: nature_of_property
             description: Source classification for the property type.
 
-          - name: Primary purpose
+          - name: primary_purpose
             description: Main use or purpose of the property.
 
-          - name: Strata lot number
+          - name: strata_lot_number
             description: Strata lot number where applicable.
 
-          - name: Dealing number
+          - name: dealing_number
             description: Legal dealing number for the property transaction.
 
-          - name: Property legal description
+          - name: property_legal_description
             description: Legal description of the property.
+
+          - name: _rescued_data
+            description: Auto Loader rescued data column for malformed or unexpected source fields.

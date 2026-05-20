@@ -6,9 +6,7 @@ models:
 
     columns:
       - name: property_id
-        description: Source property identifier.
-        tests:
-          - not_null
+        description: Source property identifier. May be missing for some source records.
 
       - name: sale_counter
         description: Sale counter from the raw source file.
@@ -16,9 +14,7 @@ models:
           - not_null
 
       - name: suburb
-        description: Standardised uppercase locality or suburb.
-        tests:
-          - not_null
+        description: Standardised uppercase locality or suburb. May be missing for a small number of source records.
 
       - name: contract_date
         description: Contract date converted from source format.

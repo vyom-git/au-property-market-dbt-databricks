@@ -5,39 +5,41 @@ with source as (
 
 ),
 
-renamed as (
+cleaned as (
 
     select
-        cast(`Property ID` as bigint) as property_id,
-        cast(`Sale counter` as bigint) as sale_counter,
+        cast(property_id as bigint) as property_id,
+        cast(sale_counter as bigint) as sale_counter,
 
-        to_timestamp(`Download date / time`, 'yyyyMMdd HH:mm') as downloaded_at,
+        to_timestamp(download_date_time, 'yyyyMMdd HH:mm') as downloaded_at,
 
-        nullif(trim(`Property name`), '') as property_name,
-        nullif(trim(`Property unit number`), '') as property_unit_number,
-        nullif(trim(`Property house number`), '') as property_house_number,
-        nullif(trim(`Property street name`), '') as property_street_name,
+        nullif(trim(property_name), '') as property_name,
+        nullif(trim(property_unit_number), '') as property_unit_number,
+        nullif(trim(property_house_number), '') as property_house_number,
+        nullif(trim(property_street_name), '') as property_street_name,
 
-        {{ standardise_suburb('`Property locality`') }} as suburb,
+        {{ standardise_suburb('property_locality') }} as suburb,
 
-        cast(`Property post code` as int) as postcode,
+        cast(property_post_code as int) as postcode,
 
-        cast(`Area` as double) as area,
-        nullif(trim(`Area type`), '') as area_type,
+        cast(area as double) as area,
+        nullif(trim(area_type), '') as area_type,
 
-        to_date(`Contract date`, 'yyyyMMdd') as contract_date,
-        to_date(`Settlement date`, 'yyyyMMdd') as settlement_date,
+        to_date(contract_date, 'yyyyMMdd') as contract_date,
+        to_date(settlement_date, 'yyyyMMdd') as settlement_date,
 
-        cast(`Purchase price` as double) as purchase_price,
+        cast(purchase_price as double) as purchase_price,
 
-        nullif(trim(`Zoning`), '') as zoning,
-        nullif(trim(`Nature of property`), '') as nature_of_property,
-        nullif(trim(`Primary purpose`), '') as primary_purpose,
+        nullif(trim(zoning), '') as zoning,
+        nullif(trim(nature_of_property), '') as nature_of_property,
+        nullif(trim(primary_purpose), '') as primary_purpose,
 
-        cast(`Strata lot number` as bigint) as strata_lot_number,
+        cast(strata_lot_number as bigint) as strata_lot_number,
 
-        nullif(trim(`Dealing number`), '') as dealing_number,
-        nullif(trim(`Property legal description`), '') as property_legal_description
+        nullif(trim(dealing_number), '') as dealing_number,
+        nullif(trim(property_legal_description), '') as property_legal_description,
+
+        _rescued_data
 
     from source
 
@@ -59,7 +61,7 @@ final as (
             else 'Other'
         end as property_purpose_group
 
-    from renamed
+    from cleaned
 
 )
 
