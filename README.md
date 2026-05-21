@@ -177,6 +177,14 @@ Usage instructions are available in:
 
 - `mcp_servers/property_project/README.md`
 
+## Project Summary
+
+A reusable project summary for CVs, interviews and portfolio write-ups is available in:
+
+- `docs/project_summary.md`
+
+The summary includes the short pitch, architecture, tools used, key models, data quality debugging story, CI/CD, Terraform, MCP and resume-ready bullet points.
+
 ## Development Workflow
 
 This project includes documentation on the AI-assisted development workflow used during the build.
@@ -222,6 +230,7 @@ Completed:
 - GitHub Actions dbt parse CI workflow
 - Local MCP server for AI-assisted project inspection
 - AI-assisted development workflow documentation
+- Portfolio project summary documentation
 
 Planned next steps:
 
