@@ -1,0 +1,32 @@
+version: 2
+
+models:
+  - name: fct_property_sales
+    description: Fact table containing analytics-ready NSW property sale transactions.
+
+    columns:
+      - name: sale_counter
+        description: Sale counter from the source file.
+        tests:
+          - not_null
+
+      - name: suburb
+        description: Standardised suburb or locality for the property sale.
+        tests:
+          - not_null
+
+      - name: contract_date
+        description: Contract date for the property sale.
+        tests:
+          - not_null
+
+      - name: settlement_date
+        description: Settlement date for the property sale.
+
+      - name: purchase_price
+        description: Property sale price.
+        tests:
+          - not_null
+
+      - name: property_purpose_group
+        description: Simplified property purpose category.
