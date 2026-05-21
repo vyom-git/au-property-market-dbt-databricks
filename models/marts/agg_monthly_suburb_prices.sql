@@ -15,6 +15,7 @@ monthly_suburb_prices as (
 
         count(*) as sale_count,
         avg(purchase_price) as avg_purchase_price,
+        percentile_approx(purchase_price, 0.5) as median_purchase_price,
         min(purchase_price) as min_purchase_price,
         max(purchase_price) as max_purchase_price
 

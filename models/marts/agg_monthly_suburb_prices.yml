@@ -26,6 +26,9 @@ models:
       - name: avg_purchase_price
         description: Average purchase price for the suburb and month.
 
+      - name: median_purchase_price
+        description: Median purchase price for the suburb and month, calculated using approximate percentile.
+
       - name: min_purchase_price
         description: Minimum purchase price for the suburb and month.
 
