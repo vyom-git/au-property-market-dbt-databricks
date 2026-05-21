@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: int_clean_property_sales
+    description: Intermediate model that prepares cleaned property sales records for downstream analytics.
+
+    columns:
+      - name: sale_counter
+        description: Sale counter from the source file.
+        tests:
+          - not_null
+
+      - name: contract_date
+        description: Contract date for the property sale.
+
+      - name: settlement_date
+        description: Settlement date for the property sale.
+
+      - name: purchase_price
+        description: Property sale price.
+        tests:
+          - not_null
+
+      - name: suburb
+        description: Standardised suburb or locality.
+
+      - name: property_purpose_group
+        description: Simplified property category used for analytics.
+
+      - name: is_analytics_usable
+        description: Boolean flag showing whether the row has the minimum fields needed for analytics.
+        tests:
+          - not_null
