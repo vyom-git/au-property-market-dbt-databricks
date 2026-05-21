@@ -1,0 +1,46 @@
+version: 2
+
+models:
+  - name: agg_suburb_rankings
+    description: Suburb-level ranking table based on property sale prices and sales volume.
+
+    columns:
+      - name: suburb
+        description: Standardised suburb or locality.
+        tests:
+          - not_null
+
+      - name: postcode
+        description: Property postcode.
+
+      - name: total_sale_count
+        description: Total number of sales for the suburb across available months.
+        tests:
+          - not_null
+
+      - name: avg_purchase_price
+        description: Average purchase price for the suburb across available months.
+
+      - name: median_purchase_price
+        description: Approximate median purchase price for the suburb across available months.
+
+      - name: min_purchase_price
+        description: Minimum purchase price recorded for the suburb.
+
+      - name: max_purchase_price
+        description: Maximum purchase price recorded for the suburb.
+
+      - name: median_price_rank
+        description: Ranking of suburbs by median purchase price, where 1 is the highest median price.
+        tests:
+          - not_null
+
+      - name: avg_price_rank
+        description: Ranking of suburbs by average purchase price, where 1 is the highest average price.
+        tests:
+          - not_null
+
+      - name: sales_volume_rank
+        description: Ranking of suburbs by total sales volume, where 1 is the highest sale count.
+        tests:
+          - not_null
