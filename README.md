@@ -157,6 +157,21 @@ dbt docs serve
 
 This shows model documentation, column descriptions, tests and lineage from source to marts.
 
+## CI/CD
+
+This project uses GitHub Actions for basic dbt validation.
+
+Current CI workflow:
+
+- runs on push to `main`
+- runs on pull requests to `main`
+- installs Python dependencies
+- installs dbt packages
+- creates a dummy dbt profile
+- runs `dbt parse`
+
+The workflow validates dbt project structure, model references, YAML files and Jinja syntax without requiring live Databricks credentials.
+
 ## Current Status
 
 Completed:
@@ -174,10 +189,10 @@ Completed:
 - dbt tests passing
 - Full `dbt build` passing
 - Add dbt documentation generation
+- GitHub Actions dbt parse CI workflow
 
 Planned next steps:
 
-- Add GitHub Actions CI for dbt checks
 - Add Terraform infrastructure templates
 - Add more mart models and dashboard examples
 - Add MCP/Codex/Cursor workflow documentation
