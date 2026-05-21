@@ -177,6 +177,16 @@ Usage instructions are available in:
 
 - `mcp_servers/property_project/README.md`
 
+## Development Workflow
+
+This project includes documentation on the AI-assisted development workflow used during the build.
+
+Workflow documentation:
+
+- `docs/ai_workflow.md`
+
+The workflow explains how ChatGPT, Cursor, GitHub Actions and MCP were used with review, testing and version control rather than blind code generation.
+
 ## CI/CD
 
 This project uses GitHub Actions for basic dbt validation.
@@ -211,9 +221,9 @@ Completed:
 - Add dbt documentation generation
 - GitHub Actions dbt parse CI workflow
 - Local MCP server for AI-assisted project inspection
+- AI-assisted development workflow documentation
 
 Planned next steps:
 
 - Import existing S3 bucket into Terraform state or use Terraform template in a clean environment
 - Add more mart models and dashboard examples
-- Add Codex/Cursor workflow documentation
