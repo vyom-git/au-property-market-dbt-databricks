@@ -185,6 +185,14 @@ A reusable project summary for CVs, interviews and portfolio write-ups is availa
 
 The summary includes the short pitch, architecture, tools used, key models, data quality debugging story, CI/CD, Terraform, MCP and resume-ready bullet points.
 
+## Dashboard Examples
+
+Example dashboard ideas and analytics use cases are available in:
+
+- `docs/dashboard_examples.md`
+
+The examples show how the mart tables can support suburb trend analysis, property type performance comparison and transaction-level drilldowns.
+
 ## Development Workflow
 
 This project includes documentation on the AI-assisted development workflow used during the build.
@@ -231,8 +239,9 @@ Completed:
 - Local MCP server for AI-assisted project inspection
 - AI-assisted development workflow documentation
 - Portfolio project summary documentation
+- Dashboard examples documentation
 
 Planned next steps:
 
 - Import existing S3 bucket into Terraform state or use Terraform template in a clean environment
-- Add more mart models and dashboard examples
+- Add more mart models and dashboard screenshots
