@@ -59,6 +59,17 @@ Notebook:
 
 - `databricks/notebooks/load_raw_property_sales_autoloader.py`
 
+### Terraform-managed AWS infrastructure
+
+The existing AWS S3 landing bucket has been imported into Terraform state. Terraform now manages the bucket definition, public access block, server-side encryption settings, tags and lifecycle cleanup rule for temporary files.
+
+Terraform files:
+
+- `terraform/aws/main.tf`
+- `terraform/aws/variables.tf`
+- `terraform/aws/outputs.tf`
+- `terraform/aws/README.md`
+
 ### Bronze
 
 The bronze layer stores the raw property sales data in Delta format with clean technical column names and minimal transformation.
@@ -246,8 +257,8 @@ Completed:
 - AI-assisted development workflow documentation
 - Portfolio project summary documentation
 - Dashboard examples documentation
+- Existing S3 bucket imported and managed with Terraform
 
 Planned next steps:
 
-- Import existing S3 bucket into Terraform state or use Terraform template in a clean environment
 - Add more mart models and dashboard screenshots
