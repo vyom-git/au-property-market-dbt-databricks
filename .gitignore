@@ -20,3 +20,14 @@ data/processed/*
 
 # VS Code
 .vscode/
+
+# Terraform local files
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+*.tfvars
+*.tfvars.json
+.terraformrc
+terraform.rc
