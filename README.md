@@ -157,6 +157,26 @@ dbt docs serve
 
 This shows model documentation, column descriptions, tests and lineage from source to marts.
 
+## MCP Server
+
+This project includes a local Model Context Protocol (MCP) server for AI-assisted project inspection.
+
+The MCP server is located at:
+
+- `mcp_servers/property_project/server.py`
+
+Current safe tools exposed by the server:
+
+- `inspect_project_structure`
+- `list_dbt_models`
+- `summarise_pipeline_layers`
+
+The MCP server is intended for local development and does not expose secrets, credentials, dbt profiles, AWS credentials, Databricks tokens or Terraform state files.
+
+Usage instructions are available in:
+
+- `mcp_servers/property_project/README.md`
+
 ## CI/CD
 
 This project uses GitHub Actions for basic dbt validation.
@@ -190,9 +210,10 @@ Completed:
 - Full `dbt build` passing
 - Add dbt documentation generation
 - GitHub Actions dbt parse CI workflow
+- Local MCP server for AI-assisted project inspection
 
 Planned next steps:
 
-- Add Terraform infrastructure templates
+- Import existing S3 bucket into Terraform state or use Terraform template in a clean environment
 - Add more mart models and dashboard examples
-- Add MCP/Codex/Cursor workflow documentation
+- Add Codex/Cursor workflow documentation
