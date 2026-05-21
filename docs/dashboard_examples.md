@@ -1,5 +1,3 @@
-
-
 # Dashboard Examples
 
 This document describes example dashboard views that can be built from the dbt mart tables in this project.
@@ -43,6 +41,17 @@ Useful for:
 - understanding which property types have the highest average or median prices
 - comparing sales volume by property type
 
+### `agg_suburb_rankings`
+
+Suburb-level ranking table.
+
+Useful for:
+
+- ranking suburbs by median purchase price
+- ranking suburbs by average purchase price
+- ranking suburbs by total sales volume
+- building leaderboard-style dashboard views
+
 ## Example Dashboard 1: Suburb Market Trends
 
 Primary table:
@@ -80,7 +89,26 @@ Questions answered:
 - Which property type has the most transactions?
 - How different are Residential, Commercial and Vacant Land sale prices?
 
-## Example Dashboard 3: Transaction Drilldown
+## Example Dashboard 3: Suburb Rankings
+
+Primary table:
+
+- `agg_suburb_rankings`
+
+Suggested visuals:
+
+- leaderboard table sorted by `median_price_rank`
+- leaderboard table sorted by `sales_volume_rank`
+- bar chart of top suburbs by `median_purchase_price`
+- bar chart of top suburbs by `total_sale_count`
+
+Questions answered:
+
+- Which suburbs have the highest median sale prices?
+- Which suburbs have the highest sales volume?
+- Which suburbs are both expensive and active?
+
+## Example Dashboard 4: Transaction Drilldown
 
 Primary table:
 

@@ -101,6 +101,7 @@ Models:
 - `fct_property_sales`
 - `agg_monthly_suburb_prices`
 - `agg_property_type_performance`
+- `agg_suburb_rankings`
 
 ## dbt Models
 
@@ -129,6 +130,10 @@ Monthly suburb-level aggregate table containing:
 ### `agg_property_type_performance`
 
 Property purpose-level aggregate table comparing performance across categories such as Residential, Commercial, Vacant Land and Other.
+
+### `agg_suburb_rankings`
+
+Suburb-level aggregate table ranking suburbs by median purchase price, average purchase price and sales volume.
 
 ## Data Quality
 
@@ -232,6 +237,7 @@ Completed:
 - dbt staging model
 - dbt intermediate model
 - dbt mart models
+- Suburb rankings aggregate mart
 - dbt tests passing
 - Full `dbt build` passing
 - Add dbt documentation generation
