@@ -141,6 +141,22 @@ The project uses dbt tests to validate key fields, including:
 
 During development, dbt tests surfaced a CSV parsing issue where quoted property names caused shifted columns. The ingestion logic was updated with explicit CSV quote and escape handling before reloading the bronze table.
 
+## dbt Documentation
+
+dbt documentation can be generated locally with:
+
+```bash
+dbt docs generate
+```
+
+The documentation site can then be served with:
+
+```bash
+dbt docs serve
+```
+
+This shows model documentation, column descriptions, tests and lineage from source to marts.
+
 ## Current Status
 
 Completed:
@@ -157,10 +173,10 @@ Completed:
 - dbt mart models
 - dbt tests passing
 - Full `dbt build` passing
+- Add dbt documentation generation
 
 Planned next steps:
 
-- Add dbt documentation generation
 - Add GitHub Actions CI for dbt checks
 - Add Terraform infrastructure templates
 - Add more mart models and dashboard examples
