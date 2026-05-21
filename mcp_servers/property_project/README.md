@@ -6,16 +6,39 @@ This folder will contain a local Model Context Protocol (MCP) server for the Aus
 
 The MCP server will let AI tools inspect and operate on this project in a controlled way.
 
+
 It is intended for local development only.
+
+## Local Usage
+
+Install project dependencies from the project root:
+
+```bash
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+Run the MCP server locally:
+
+```bash
+python mcp_servers/property_project/server.py
+```
+
+The server is intended to be connected to an MCP-compatible AI tool such as Cursor or another local AI coding assistant.
+
+Current safe tools exposed by the server:
+
+- `inspect_project_structure`
+- `list_dbt_models`
+- `summarise_pipeline_layers`
 
 ## Planned Tools
 
-The first version should expose safe helper tools such as:
+The current version exposes safe helper tools such as:
 
 - `list_dbt_models` — list dbt models in the project
 - `inspect_project_structure` — summarise the main project folders
 - `summarise_pipeline_layers` — describe the S3, Databricks and dbt pipeline layers
-- `run_dbt_parse` — run `dbt parse` from the project root
 
 ## Why MCP is useful here
 
