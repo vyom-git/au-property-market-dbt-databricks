@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: agg_monthly_suburb_prices
+    description: Monthly suburb-level property sales aggregation for market trend analysis.
+
+    columns:
+      - name: suburb
+        description: Standardised suburb or locality.
+        tests:
+          - not_null
+
+      - name: postcode
+        description: Property postcode.
+
+      - name: contract_month
+        description: Month of the property contract date.
+        tests:
+          - not_null
+
+      - name: sale_count
+        description: Number of property sales in the suburb for the month.
+        tests:
+          - not_null
+
+      - name: avg_purchase_price
+        description: Average purchase price for the suburb and month.
+
+      - name: min_purchase_price
+        description: Minimum purchase price for the suburb and month.
+
+      - name: max_purchase_price
+        description: Maximum purchase price for the suburb and month.
