@@ -8,10 +8,14 @@ with source as (
 cleaned as (
 
     select
-        cast(property_id as bigint) as property_id,
+        try_cast(try_cast(property_id as double) as bigint) as property_id,
         cast(sale_counter as bigint) as sale_counter,
 
-        to_timestamp(download_date_time, 'yyyyMMdd HH:mm') as downloaded_at,
+        coalesce(
+            try_to_timestamp(download_date_time, 'yyyyMMdd HH:mm'),
+            try_to_timestamp(download_date_time, 'yyyy-MM-dd HH:mm:ss'),
+            try_to_timestamp(download_date_time, 'yyyy-MM-dd HH:mm')
+        ) as downloaded_at,
 
         nullif(trim(property_name), '') as property_name,
         nullif(trim(property_unit_number), '') as property_unit_number,
@@ -20,13 +24,20 @@ cleaned as (
 
         {{ standardise_suburb('property_locality') }} as suburb,
 
-        cast(property_post_code as int) as postcode,
+        try_cast(try_cast(property_post_code as double) as int) as postcode,
 
         cast(area as double) as area,
         nullif(trim(area_type), '') as area_type,
 
-        to_date(contract_date, 'yyyyMMdd') as contract_date,
-        to_date(settlement_date, 'yyyyMMdd') as settlement_date,
+        coalesce(
+            try_to_date(contract_date, 'yyyyMMdd'),
+            try_to_date(contract_date, 'yyyy-MM-dd')
+        ) as contract_date,
+
+        coalesce(
+            try_to_date(settlement_date, 'yyyyMMdd'),
+            try_to_date(settlement_date, 'yyyy-MM-dd')
+        ) as settlement_date,
 
         cast(purchase_price as double) as purchase_price,
 

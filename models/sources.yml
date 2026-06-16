@@ -3,11 +3,12 @@ version: 2
 sources:
   - name: bronze
     description: Raw NSW property sales data loaded into the Databricks bronze layer.
-    database: workspace
+    database: "{{ target.catalog }}"
     schema: property_analytics_bronze
 
     tables:
       - name: raw_property_sales
+        identifier: "{{ 'raw_property_sales_adls' if target.name == 'azure_dev' else 'raw_property_sales' }}"
         description: Raw NSW property sales CSV loaded as a bronze Delta table.
 
         columns:
