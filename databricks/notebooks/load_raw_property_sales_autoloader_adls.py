@@ -23,16 +23,16 @@ source_path = (
 )
 
 schema_location = (
-    "/Volumes/workspace/property_analytics_metadata/autoloader_metadata/"
+    "/Volumes/adb_au_property_market_dev/property_analytics_metadata/autoloader_metadata/"
     "adls/schema/nsw_property_sales/"
 )
 
 checkpoint_location = (
-    "/Volumes/workspace/property_analytics_metadata/autoloader_metadata/"
+    "/Volumes/adb_au_property_market_dev/property_analytics_metadata/autoloader_metadata/"
     "adls/checkpoints/nsw_property_sales/"
 )
 
-target_table = "workspace.property_analytics_bronze.raw_property_sales_adls"
+target_table = "adb_au_property_market_dev.property_analytics_bronze.raw_property_sales_adls"
 
 # COMMAND ----------
 
