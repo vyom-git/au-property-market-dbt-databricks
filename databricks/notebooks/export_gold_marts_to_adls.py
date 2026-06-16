@@ -17,10 +17,10 @@ gold_base_path = f"abfss://gold@{storage_account_name}.dfs.core.windows.net"
 # COMMAND ----------
 
 gold_marts = {
-    "agg_suburb_rankings": "workspace.property_analytics_marts.agg_suburb_rankings",
-    "agg_monthly_suburb_prices": "workspace.property_analytics_marts.agg_monthly_suburb_prices",
-    "agg_property_type_performance": "workspace.property_analytics_marts.agg_property_type_performance",
-    "fct_property_sales": "workspace.property_analytics_marts.fct_property_sales",
+    "agg_suburb_rankings": "adb_au_property_market_dev.property_analytics_marts.agg_suburb_rankings",
+    "agg_monthly_suburb_prices": "adb_au_property_market_dev.property_analytics_marts.agg_monthly_suburb_prices",
+    "agg_property_type_performance": "adb_au_property_market_dev.property_analytics_marts.agg_property_type_performance",
+    "fct_property_sales": "adb_au_property_market_dev.property_analytics_marts.fct_property_sales",
 }
 
 # COMMAND ----------
