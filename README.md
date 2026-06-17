@@ -234,6 +234,31 @@ Current CI workflow:
 
 The workflow validates dbt project structure, model references, YAML files and Jinja syntax without requiring live Databricks credentials.
 
+## Azure orchestration implementation
+
+This project also includes a working Azure-native orchestration flow using ADLS Gen2, Azure Data Factory, Azure Databricks, dbt and Synapse serverless SQL.
+
+The Azure flow is:
+
+```text
+ADLS Gen2 raw container
+↓
+Azure Data Factory pipeline
+↓
+Azure Databricks Auto Loader notebook
+↓
+Bronze Delta table
+↓
+dbt build notebook
+↓
+Staging, intermediate, fact and mart models
+↓
+Gold Delta tables
+↓
+ADLS Gen2 gold container
+↓
+Synapse serverless SQL external views
+
 ## Current Status
 
 Completed:
