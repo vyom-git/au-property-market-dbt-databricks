@@ -1,0 +1,11 @@
+{
+  "type": "AzureBlobFS",
+  "typeProperties": {
+    "url": "https://aupropmarket31963.dfs.core.windows.net/",
+    "authentication": "MSI"
+  },
+  "annotations": [
+    "adls-gen2",
+    "property-market"
+  ]
+}

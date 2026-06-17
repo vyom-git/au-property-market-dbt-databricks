@@ -46,7 +46,27 @@ subprocess.run(
 
 # COMMAND ----------
 
-result = subprocess.run(
+deps_result = subprocess.run(
+    [
+        "dbt",
+        "deps",
+        "--profiles-dir",
+        str(profiles_dir),
+    ],
+    cwd=str(repo_path),
+    text=True,
+    capture_output=True,
+)
+
+print(deps_result.stdout)
+print(deps_result.stderr)
+
+if deps_result.returncode != 0:
+    raise RuntimeError("dbt deps failed")
+
+# COMMAND ----------
+
+build_result = subprocess.run(
     [
         "dbt",
         "build",
@@ -60,10 +80,10 @@ result = subprocess.run(
     capture_output=True,
 )
 
-print(result.stdout)
-print(result.stderr)
+print(build_result.stdout)
+print(build_result.stderr)
 
-if result.returncode != 0:
+if build_result.returncode != 0:
     raise RuntimeError("dbt build failed")
 
 # COMMAND ----------

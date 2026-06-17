@@ -1,0 +1,16 @@
+{
+  "type": "AzureDatabricks",
+  "typeProperties": {
+    "domain": "https://adb-7405605636756373.13.azuredatabricks.net",
+    "accessToken": {
+      "type": "SecureString",
+      "value": "{{ env('DATABRICKS_TOKEN') }}"
+    },
+    "existingClusterId": "0616-051039-7dq9gazc"
+  },
+  "annotations": [
+    "azure-databricks",
+    "property-market",
+    "existing-cluster"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "linkedServiceName": {
+    "referenceName": "ls_adls_gen2_property",
+    "type": "LinkedServiceReference"
+  },
+  "type": "DelimitedText",
+  "typeProperties": {
+    "location": {
+      "type": "AzureBlobFSLocation",
+      "fileSystem": "raw",
+      "folderPath": "nsw_property_sales",
+      "fileName": "nsw_property_sales.csv"
+    },
+    "columnDelimiter": ",",
+    "escapeChar": "\"",
+    "quoteChar": "\"",
+    "firstRowAsHeader": true
+  },
+  "annotations": [
+    "raw",
+    "nsw-property-sales"
+  ]
+}

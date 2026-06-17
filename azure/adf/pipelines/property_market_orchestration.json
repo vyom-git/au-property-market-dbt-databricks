@@ -1,103 +1,135 @@
 {
-    "name": "property_market_orchestration",
-    "properties": {
-      "description": "ADF orchestration pattern for the Australian property market lakehouse pipeline. The pipeline checks for raw NSW property sales data in ADLS Gen2, triggers Databricks ingestion, runs transformation/export jobs, and supports downstream Synapse reporting.",
-      "activities": [
-        {
-          "name": "Check raw property sales file exists",
-          "type": "GetMetadata",
-          "dependsOn": [],
-          "policy": {
-            "timeout": "0.12:00:00",
-            "retry": 2,
-            "retryIntervalInSeconds": 60
-          },
-          "typeProperties": {
-            "dataset": {
-              "referenceName": "ds_adls_raw_property_sales",
-              "type": "DatasetReference"
-            },
-            "fieldList": [
-              "exists",
-              "size",
-              "lastModified"
-            ]
-          }
+  "description": "Orchestrates NSW property market ingestion, dbt transformation, and ADLS gold export using Azure Data Factory and Azure Databricks.",
+  "activities": [
+    {
+      "name": "Check raw property sales file",
+      "type": "GetMetadata",
+      "dependsOn": [],
+      "policy": {
+        "timeout": "0.12:00:00",
+        "retry": 1,
+        "retryIntervalInSeconds": 30,
+        "secureOutput": false,
+        "secureInput": false
+      },
+      "typeProperties": {
+        "dataset": {
+          "referenceName": "ds_adls_raw_property_sales",
+          "type": "DatasetReference"
         },
+        "fieldList": [
+          "exists",
+          "size",
+          "lastModified"
+        ]
+      }
+    },
+    {
+      "name": "If raw file exists",
+      "type": "IfCondition",
+      "dependsOn": [
         {
-          "name": "If raw file exists",
-          "type": "IfCondition",
-          "dependsOn": [
-            {
-              "activity": "Check raw property sales file exists",
-              "dependencyConditions": [
-                "Succeeded"
-              ]
-            }
-          ],
-          "typeProperties": {
-            "expression": {
-              "type": "Expression",
-              "value": "@activity('Check raw property sales file exists').output.exists"
-            },
-            "ifTrueActivities": [
-              {
-                "name": "Run Databricks ADLS Auto Loader ingestion",
-                "type": "DatabricksNotebook",
-                "dependsOn": [],
-                "typeProperties": {
-                  "notebookPath": "/Repos/vyom/au-property-market-dbt-databricks/databricks/notebooks/load_raw_property_sales_autoloader_adls"
-                }
-              },
-              {
-                "name": "Run dbt build job",
-                "type": "DatabricksNotebook",
-                "dependsOn": [
-                  {
-                    "activity": "Run Databricks ADLS Auto Loader ingestion",
-                    "dependencyConditions": [
-                      "Succeeded"
-                    ]
-                  }
-                ],
-                "typeProperties": {
-                  "notebookPath": "/Repos/vyom/au-property-market-dbt-databricks/databricks/notebooks/run_dbt_build"
-                }
-              },
-              {
-                "name": "Export gold marts to ADLS",
-                "type": "DatabricksNotebook",
-                "dependsOn": [
-                  {
-                    "activity": "Run dbt build job",
-                    "dependencyConditions": [
-                      "Succeeded"
-                    ]
-                  }
-                ],
-                "typeProperties": {
-                  "notebookPath": "/Repos/vyom/au-property-market-dbt-databricks/databricks/notebooks/export_gold_marts_to_adls"
-                }
-              }
-            ],
-            "ifFalseActivities": [
-              {
-                "name": "No raw file found",
-                "type": "Wait",
-                "typeProperties": {
-                  "waitTimeInSeconds": 1
-                }
-              }
-            ]
-          }
+          "activity": "Check raw property sales file",
+          "dependencyConditions": [
+            "Succeeded"
+          ]
         }
       ],
-      "annotations": [
-        "portfolio",
-        "adls-gen2",
-        "databricks",
-        "dbt",
-        "synapse"
-      ]
+      "typeProperties": {
+        "expression": {
+          "value": "@activity('Check raw property sales file').output.exists",
+          "type": "Expression"
+        },
+        "ifTrueActivities": [
+          {
+            "name": "Run ADLS Auto Loader",
+            "type": "DatabricksNotebook",
+            "dependsOn": [],
+            "policy": {
+              "timeout": "0.12:00:00",
+              "retry": 1,
+              "retryIntervalInSeconds": 60,
+              "secureOutput": false,
+              "secureInput": false
+            },
+            "linkedServiceName": {
+              "referenceName": "ls_azure_databricks_property",
+              "type": "LinkedServiceReference"
+            },
+            "typeProperties": {
+              "notebookPath": "/Users/vyomchauhan@icloud.com/au-property-market-dbt-databricks/databricks/notebooks/load_raw_property_sales_autoloader_adls"
+            }
+          },
+          {
+            "name": "Run dbt build",
+            "type": "DatabricksNotebook",
+            "dependsOn": [
+              {
+                "activity": "Run ADLS Auto Loader",
+                "dependencyConditions": [
+                  "Succeeded"
+                ]
+              }
+            ],
+            "policy": {
+              "timeout": "0.12:00:00",
+              "retry": 0,
+              "retryIntervalInSeconds": 60,
+              "secureOutput": false,
+              "secureInput": false
+            },
+            "linkedServiceName": {
+              "referenceName": "ls_azure_databricks_property",
+              "type": "LinkedServiceReference"
+            },
+            "typeProperties": {
+              "notebookPath": "/Users/vyomchauhan@icloud.com/au-property-market-dbt-databricks/databricks/notebooks/run_dbt_build"
+            }
+          },
+          {
+            "name": "Export gold marts to ADLS",
+            "type": "DatabricksNotebook",
+            "dependsOn": [
+              {
+                "activity": "Run dbt build",
+                "dependencyConditions": [
+                  "Succeeded"
+                ]
+              }
+            ],
+            "policy": {
+              "timeout": "0.12:00:00",
+              "retry": 1,
+              "retryIntervalInSeconds": 60,
+              "secureOutput": false,
+              "secureInput": false
+            },
+            "linkedServiceName": {
+              "referenceName": "ls_azure_databricks_property",
+              "type": "LinkedServiceReference"
+            },
+            "typeProperties": {
+              "notebookPath": "/Users/vyomchauhan@icloud.com/au-property-market-dbt-databricks/databricks/notebooks/export_gold_marts_to_adls"
+            }
+          }
+        ],
+        "ifFalseActivities": [
+          {
+            "name": "Raw file missing wait",
+            "type": "Wait",
+            "dependsOn": [],
+            "typeProperties": {
+              "waitTimeInSeconds": 30
+            }
+          }
+        ]
+      }
     }
-  }
+  ],
+  "annotations": [
+    "adls-gen2",
+    "azure-databricks",
+    "dbt",
+    "property-market"
+  ]
+}
